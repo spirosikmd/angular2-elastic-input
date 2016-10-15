@@ -1,6 +1,6 @@
 {
   "name": "angular2-elastic-input",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Angular2 directive that adjusts the width of a text input while typing",
   "main": "index.js",
   "module": "index.js",
