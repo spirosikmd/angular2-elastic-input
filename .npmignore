@@ -1,0 +1,13 @@
+# Node generated files
+node_modules
+npm-debug.log
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# IDE generated files
+.idea
+
+# Angular 2 compiler generated files
+aot

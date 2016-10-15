@@ -1,0 +1,41 @@
+{
+  "name": "angular2-elastic",
+  "version": "1.0.0",
+  "description": "Angular2 directive that adjusts the width of a text input while typing",
+  "main": "index.js",
+  "module": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ngc",
+    "prepublish": "ngc",
+    "demo": "browserify demo/main.ts -p [ tsify ] -o demo/bundle.js"
+  },
+  "keywords": [
+    "angular",
+    "angular2",
+    "elastic",
+    "input",
+    "@angular"
+  ],
+  "author": "Spyros Ioakeimidis <spyrosikmd@gmail.com> (http://www.spyros.io)",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/compiler": "^2.1.0",
+    "@angular/compiler-cli": "^2.1.0",
+    "@angular/core": "^2.1.0",
+    "rxjs": "^5.0.0-beta.12",
+    "zone.js": "^0.6.25"
+  },
+  "devDependencies": {
+    "@angular/common": "^2.1.0",
+    "@angular/platform-browser": "^2.1.0",
+    "@angular/platform-browser-dynamic": "^2.1.0",
+    "@angular/platform-server": "^2.1.0",
+    "@types/core-js": "^0.9.34",
+    "browserify": "^13.1.0",
+    "core-js": "^2.4.1",
+    "tsify": "^2.0.2",
+    "typescript": "^2.0.3"
+  },
+  "typings": "index.d.ts"
+}
