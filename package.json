@@ -19,19 +19,23 @@
   ],
   "author": "Spyros Ioakeimidis <spyrosikmd@gmail.com> (http://www.spyros.io)",
   "license": "MIT",
-  "dependencies": {
-    "@angular/compiler": "^2.1.0",
-    "@angular/compiler-cli": "^2.1.0",
+  "peerDependencies": {
     "@angular/core": "^2.1.0",
-    "rxjs": "^5.0.0-beta.12",
-    "zone.js": "^0.6.25"
+    "rxjs": "5.0.0-beta.12"
+  },
+  "dependencies": {
+    "@angular/core": "^2.1.0",
+    "rxjs": "5.0.0-beta.12"
   },
   "devDependencies": {
+    "@angular/compiler": "^2.1.0",
+    "@angular/compiler-cli": "^2.1.0",
     "@angular/common": "^2.1.0",
     "@angular/platform-browser": "^2.1.0",
     "@angular/platform-browser-dynamic": "^2.1.0",
     "@angular/platform-server": "^2.1.0",
     "@types/core-js": "^0.9.34",
+    "zone.js": "^0.6.25",
     "browserify": "^13.1.0",
     "core-js": "^2.4.1",
     "tsify": "^2.0.2",
