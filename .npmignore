@@ -9,5 +9,9 @@ Thumbs.db
 # IDE generated files
 .idea
 
-# Angular 2 compiler generated files
-aot
+# Ignored files
+*.ts
+!*.d.ts
+
+# Demo
+demo

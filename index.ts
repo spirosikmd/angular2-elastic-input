@@ -1,1 +1,1 @@
-export * from './src/elastic-input.directive';
+export {ElasticInput} from './src/elastic-input.module';

@@ -4,18 +4,19 @@
     "target": "es5",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
     "moduleResolution": "node",
     "declaration": true
   },
   "files": [
-    "./index.ts"
+    "index.ts"
   ],
   "exclude": [
     "node_modules"
   ],
   "angularCompilerOptions": {
-    "genDir": "aot",
-    "skipMetadataEmit": false
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true
   }
 }

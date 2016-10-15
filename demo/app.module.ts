@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
-import {ElasticInput} from '../src/elastic-input.directive';
+import {ElasticInputDirective} from '../src/elastic-input.directive';
 @NgModule({
   imports: [BrowserModule],
-  declarations: [AppComponent, ElasticInput],
+  declarations: [AppComponent, ElasticInputDirective],
   bootstrap: [AppComponent]
 })
 export class AppModule {

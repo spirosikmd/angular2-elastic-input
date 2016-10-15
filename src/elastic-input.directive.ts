@@ -3,7 +3,7 @@ import {ElementRef, HostListener, Directive, OnInit} from '@angular/core';
 @Directive({
   selector: 'input[elastic-input]'
 })
-export class ElasticInput implements OnInit {
+export class ElasticInputDirective implements OnInit {
   wrapper: HTMLElement;
   mirror: HTMLElement;
 
