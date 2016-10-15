@@ -22,10 +22,8 @@ import {ElasticInput} from 'angular2-elastic-input';
 class AppComponent { }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ElasticInput
-  ],
+  imports: [ElasticInput],
+  declarations: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
