@@ -1,1 +1,1 @@
-export * from './src/elastic.directive';
+export * from './src/elastic-input.directive';

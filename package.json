@@ -1,5 +1,5 @@
 {
-  "name": "angular2-elastic",
+  "name": "angular2-elastic-input",
   "version": "1.0.0",
   "description": "Angular2 directive that adjusts the width of a text input while typing",
   "main": "index.js",
@@ -40,6 +40,6 @@
   "typings": "index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/spirosikmd/angular2-elastic"
+    "url": "https://github.com/spirosikmd/angular2-elastic-input"
   }
 }

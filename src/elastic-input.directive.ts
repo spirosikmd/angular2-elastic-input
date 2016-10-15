@@ -1,9 +1,9 @@
 import {ElementRef, HostListener, Directive, OnInit} from '@angular/core';
 
 @Directive({
-  selector: 'input[elastic]'
+  selector: 'input[elastic-input]'
 })
-export class Elastic implements OnInit {
+export class ElasticInput implements OnInit {
   wrapper: HTMLElement;
   mirror: HTMLElement;
 

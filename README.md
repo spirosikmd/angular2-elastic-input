@@ -1,4 +1,4 @@
-# angular2-elastic
+# angular2-elastic-input
 
 Angular2 directive that adjusts the width of a text input while typing.
 
@@ -6,17 +6,17 @@ Based on [angular-elastic-input](https://github.com/jacek-pulit/angular-elastic-
 
 ## Install
 
-`npm install --save angular2-elastic`
+`npm install --save angular2-elastic-input`
 
 ## Example
 
 ```typescript
 import {NgModule, Component} from '@angular/core';
-import {Elastic} from 'angular2-elastic';
+import {ElasticInput} from 'angular2-elastic-input';
 
 @Component({
   template: `
-    <input type="text" elastic>
+    <input type="text" elastic-input>
   `
 })
 class AppComponent { }
@@ -24,7 +24,7 @@ class AppComponent { }
 @NgModule({
   declarations: [
     AppComponent,
-    Elastic
+    ElasticInput
   ],
   bootstrap: [AppComponent]
 })
