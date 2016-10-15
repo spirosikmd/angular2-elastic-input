@@ -37,5 +37,9 @@
     "tsify": "^2.0.2",
     "typescript": "^2.0.3"
   },
-  "typings": "index.d.ts"
+  "typings": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spirosikmd/angular2-elastic"
+  },
 }
