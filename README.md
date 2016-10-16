@@ -28,3 +28,5 @@ class AppComponent { }
 })
 export class AppModule { }
 ```
+
+Check the [demo](demo) for a complete example.
