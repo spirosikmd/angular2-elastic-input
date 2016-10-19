@@ -45,3 +45,6 @@ aot
 *.js
 *.d.ts
 *.metadata.json
+
+# Exclude the bundle demo file
+!docs/bundle.js
