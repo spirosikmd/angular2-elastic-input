@@ -38,14 +38,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
-var elastic_input_directive_1 = require('../src/elastic-input.directive');
+var elastic_input_module_1 = require('../src/elastic-input.module');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.AppComponent, elastic_input_directive_1.ElasticInputDirective],
+            imports: [platform_browser_1.BrowserModule, elastic_input_module_1.ElasticInputModule.forRoot()],
+            declarations: [app_component_1.AppComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
@@ -54,7 +54,7 @@ var AppModule = (function () {
 }());
 exports.AppModule = AppModule;
 
-},{"../src/elastic-input.directive":109,"./app.component":1,"@angular/core":6,"@angular/platform-browser":8}],3:[function(require,module,exports){
+},{"../src/elastic-input.module":110,"./app.component":1,"@angular/core":6,"@angular/platform-browser":8}],3:[function(require,module,exports){
 "use strict";
 require('core-js/es7/reflect');
 require('zone.js/dist/zone');
@@ -37547,4 +37547,36 @@ var ElasticInputDirective = (function () {
 }());
 exports.ElasticInputDirective = ElasticInputDirective;
 
-},{"@angular/core":6}]},{},[3]);
+},{"@angular/core":6}],110:[function(require,module,exports){
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var elastic_input_directive_1 = require('./elastic-input.directive');
+var ElasticInputModule = (function () {
+    function ElasticInputModule() {
+    }
+    ElasticInputModule.forRoot = function () {
+        return {
+            ngModule: ElasticInputModule
+        };
+    };
+    ElasticInputModule = __decorate([
+        core_1.NgModule({
+            declarations: [elastic_input_directive_1.ElasticInputDirective],
+            exports: [elastic_input_directive_1.ElasticInputDirective]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], ElasticInputModule);
+    return ElasticInputModule;
+}());
+exports.ElasticInputModule = ElasticInputModule;
+
+},{"./elastic-input.directive":109,"@angular/core":6}]},{},[3]);
