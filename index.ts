@@ -1,1 +1,1 @@
-export {ElasticInputModule} from './src/elastic-input.module';
+export * from './src/elastic-input.module';
