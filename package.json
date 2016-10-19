@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ngc",
     "prepublish": "ngc",
-    "demo": "browserify demo/main.ts -p [ tsify ] -o demo/bundle.js"
+    "docs": "browserify docs/main.ts -p [ tsify ] -o docs/bundle.js"
   },
   "keywords": [
     "angular",

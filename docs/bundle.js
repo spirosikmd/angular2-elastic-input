@@ -45,7 +45,7 @@ var AppModule = (function () {
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.AppComponent, elastic_input_directive_1.ElasticInput],
+            declarations: [app_component_1.AppComponent, elastic_input_directive_1.ElasticInputDirective],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
@@ -60,10 +60,12 @@ require('core-js/es7/reflect');
 require('zone.js/dist/zone');
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var app_module_1 = require('./app.module');
+var core_1 = require('@angular/core');
+core_1.enableProdMode();
 var platform = platform_browser_dynamic_1.platformBrowserDynamic();
 platform.bootstrapModule(app_module_1.AppModule);
 
-},{"./app.module":2,"@angular/platform-browser-dynamic":7,"core-js/es7/reflect":9,"zone.js/dist/zone":108}],4:[function(require,module,exports){
+},{"./app.module":2,"@angular/core":6,"@angular/platform-browser-dynamic":7,"core-js/es7/reflect":9,"zone.js/dist/zone":108}],4:[function(require,module,exports){
 (function (global){
 /**
  * @license Angular v2.1.0
@@ -37479,14 +37481,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var ElasticInput = (function () {
-    function ElasticInput(element) {
+var ElasticInputDirective = (function () {
+    function ElasticInputDirective(element) {
         this.element = element;
     }
-    ElasticInput.prototype.onInput = function () {
+    ElasticInputDirective.prototype.onInput = function () {
         this.update();
     };
-    ElasticInput.prototype.ngOnInit = function () {
+    ElasticInputDirective.prototype.ngOnInit = function () {
         this.wrapper = document.createElement('div');
         this.wrapper.style.position = 'fixed';
         this.wrapper.style.top = '-999px';
@@ -37498,14 +37500,14 @@ var ElasticInput = (function () {
         this.wrapper.appendChild(this.mirror);
         this.update();
     };
-    ElasticInput.prototype.ngAfterContentChecked = function () {
+    ElasticInputDirective.prototype.ngAfterContentChecked = function () {
         this.update();
     };
-    ElasticInput.prototype.ngOnDestroy = function () {
+    ElasticInputDirective.prototype.ngOnDestroy = function () {
         this.mirror.remove();
         this.wrapper.remove();
     };
-    ElasticInput.prototype.setMirrorStyle = function (mirror, element) {
+    ElasticInputDirective.prototype.setMirrorStyle = function (mirror, element) {
         var style = window.getComputedStyle(element);
         ['fontFamily', 'fontSize', 'fontWeight', 'fontStyle',
             'letterSpacing', 'textTransform', 'wordSpacing'].forEach(function (value) {
@@ -37524,7 +37526,7 @@ var ElasticInput = (function () {
             });
         }
     };
-    ElasticInput.prototype.update = function () {
+    ElasticInputDirective.prototype.update = function () {
         this.mirror.innerText = this.element.nativeElement.value;
         var delta = 1;
         this.element.nativeElement.style.width = (this.mirror.offsetWidth + delta) + "px";
@@ -37534,15 +37536,15 @@ var ElasticInput = (function () {
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
-    ], ElasticInput.prototype, "onInput", null);
-    ElasticInput = __decorate([
+    ], ElasticInputDirective.prototype, "onInput", null);
+    ElasticInputDirective = __decorate([
         core_1.Directive({
             selector: 'input[elastic-input]'
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
-    ], ElasticInput);
-    return ElasticInput;
+    ], ElasticInputDirective);
+    return ElasticInputDirective;
 }());
-exports.ElasticInput = ElasticInput;
+exports.ElasticInputDirective = ElasticInputDirective;
 
 },{"@angular/core":6}]},{},[3]);
