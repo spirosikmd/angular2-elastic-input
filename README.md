@@ -12,7 +12,7 @@ Based on [angular-elastic-input](https://github.com/jacek-pulit/angular-elastic-
 
 ```typescript
 import {NgModule, Component} from '@angular/core';
-import {ElasticInput} from 'angular2-elastic-input';
+import {ElasticInputModule} from 'angular2-elastic-input';
 
 @Component({
   template: `
@@ -22,7 +22,7 @@ import {ElasticInput} from 'angular2-elastic-input';
 class AppComponent { }
 
 @NgModule({
-  imports: [ElasticInput],
+  imports: [ElasticInputModule.forRoot()],
   declarations: [AppComponent],
   bootstrap: [AppComponent]
 })
