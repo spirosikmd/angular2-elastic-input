@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 @Component({
   selector: 'app',
-  template: '<input type="text" elastic-input>'
+  templateUrl: 'app.html'
 })
 export class AppComponent {
 }

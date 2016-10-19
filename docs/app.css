@@ -1,0 +1,33 @@
+body {
+    background: rgb(38, 50, 56);
+    padding: 0;
+    margin: 0;
+}
+
+.elastic-input {
+    background: none;
+    border: 0;
+    border-bottom: 1px dotted rgb(255, 203, 107);
+    color: rgb(109, 194, 194);
+    font-size: 40px;
+}
+
+.elastic-input:focus {
+    outline: none;
+}
+
+.aligner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.aligner-item {
+    max-width: 50%;
+}
+
+.aligner-item--fixed {
+    flex: none;
+    max-width: 50%;
+}

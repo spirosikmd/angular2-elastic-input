@@ -16,7 +16,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app',
-            template: '<input type="text" elastic-input>'
+            templateUrl: 'app.html'
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
