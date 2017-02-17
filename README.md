@@ -8,6 +8,7 @@ Based on [angular-elastic-input](https://github.com/jacek-pulit/angular-elastic-
 [![version][version-badge]][package]
 [![PRs Welcome][prs-badge]](http://makeapullrequest.com)
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![Greenkeeper badge][greenkeeper-badge]](https://greenkeeper.io/)
 
 ## Install
 
@@ -53,3 +54,4 @@ Contributions of any kind welcome!
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [build-badge]: https://img.shields.io/travis/spirosikmd/angular2-elastic-input.svg?style=flat-square
 [build]: https://travis-ci.org/spirosikmd/angular2-elastic-input.svg
+[greenkeeper-badge]: https://badges.greenkeeper.io/spirosikmd/angular2-elastic-input.svg
