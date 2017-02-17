@@ -1,5 +1,7 @@
 # angular2-elastic-input
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/spirosikmd/angular2-elastic-input.svg)](https://greenkeeper.io/)
+
 Angular2 directive that adjusts the width of a text input while typing.
 
 Based on [angular-elastic-input](https://github.com/jacek-pulit/angular-elastic-input).
