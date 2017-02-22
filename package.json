@@ -55,7 +55,7 @@
     "semantic-release": "^6.3.2",
     "tsify": "^3.0.1",
     "tslint": "^4.4.2",
-    "typescript": "^2.0.3",
+    "typescript": "^2.2.1",
     "wallaby-webpack": "^0.0.33",
     "watchify": "^3.7.0",
     "webpack": "^2.2.1",
