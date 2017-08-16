@@ -52,7 +52,7 @@
     "lite-server": "^2.3.0",
     "null-loader": "^0.1.1",
     "rxjs": "^5.4.0",
-    "semantic-release": "^6.3.2",
+    "semantic-release": "^7.0.1",
     "tsify": "^3.0.1",
     "tslint": "^5.2.0",
     "typescript": "^2.3.2",
