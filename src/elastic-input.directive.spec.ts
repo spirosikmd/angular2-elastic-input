@@ -49,5 +49,19 @@ describe('elastic-input', function () {
       expect(this.directive.mirror.innerText).toBe('foo');
       expect(this.elementRef.nativeElement.style.width).toBe('101px');
     });
+
+    it('sets native element value to mirror innerText when placeholder', function () {
+      this.elementRef.nativeElement.style = {
+        width: '10px'
+      };
+      this.elementRef.nativeElement.placeholder = 'placeholder';
+      this.directive.mirror = {
+        innerText: '',
+        offsetWidth: 100
+      };
+      this.directive.update();
+      expect(this.directive.mirror.innerText).toBe('placeholder');
+      expect(this.elementRef.nativeElement.style.width).toBe('101px');
+    });
   });
 });

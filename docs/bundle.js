@@ -55494,9 +55494,10 @@ var ElasticInputDirective = (function () {
         }
     };
     ElasticInputDirective.prototype.update = function () {
-        this.mirror.innerText = this.element.nativeElement.value;
+        var domEl = this.element.nativeElement;
+        this.mirror.innerText = domEl.value || domEl.placeholder;
         var delta = 1;
-        this.element.nativeElement.style.width = this.mirror.offsetWidth + delta + "px";
+        domEl.style.width = this.mirror.offsetWidth + delta + "px";
     };
     return ElasticInputDirective;
 }());
