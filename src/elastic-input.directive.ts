@@ -43,7 +43,7 @@ export class ElasticInputDirective implements OnInit {
   }
 
   setMirrorStyle (mirror: HTMLElement, element: HTMLElement) {
-    let style = window.getComputedStyle(element);
+    const style = window.getComputedStyle(element);
 
     ['fontFamily', 'fontSize', 'fontWeight', 'fontStyle',
       'letterSpacing', 'textTransform', 'wordSpacing'].forEach(
@@ -66,8 +66,9 @@ export class ElasticInputDirective implements OnInit {
   }
 
   update () {
-    this.mirror.innerText = this.element.nativeElement.value;
-    let delta = 1;
-    this.element.nativeElement.style.width = `${this.mirror.offsetWidth + delta}px`;
+    const domEl = this.element.nativeElement;
+    this.mirror.innerText = domEl.value || domEl.placeholder;
+    const delta = 1;
+    domEl.style.width = `${this.mirror.offsetWidth + delta}px`;
   }
 }
