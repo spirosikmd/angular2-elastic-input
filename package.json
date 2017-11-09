@@ -2,8 +2,8 @@
   "name": "angular2-elastic-input",
   "version": "0.0.0-development",
   "description": "Angular attribute directive that adjusts the width of a text input while typing",
-  "main": "index.js",
-  "module": "index.js",
+  "main": "src/index.js",
+  "typings": "src/index.d.ts",
   "scripts": {
     "test": "karma start",
     "lint": "tslint -c tslint.json 'index.ts src/**/*.ts docs/**/*.ts'",
@@ -25,15 +25,15 @@
   "author": "Spyros Ioakeimidis <spyrosikmd@gmail.com> (http://www.spyros.io)",
   "license": "MIT",
   "dependencies": {
-    "@angular/core": "^4.4.6"
+    "@angular/core": "^5.0.1"
   },
   "devDependencies": {
-    "@angular/common": "^4.4.6",
-    "@angular/compiler": "^4.4.6",
-    "@angular/compiler-cli": "^4.4.6",
-    "@angular/platform-browser": "^4.4.6",
-    "@angular/platform-browser-dynamic": "^4.4.6",
-    "@angular/platform-server": "^4.4.6",
+    "@angular/common": "^5.0.1",
+    "@angular/compiler": "^5.0.1",
+    "@angular/compiler-cli": "^5.0.1",
+    "@angular/platform-browser": "^5.0.1",
+    "@angular/platform-browser-dynamic": "^5.0.1",
+    "@angular/platform-server": "^5.0.1",
     "@types/core-js": "^0.9.43",
     "@types/jasmine": "^2.6.0",
     "all-contributors-cli": "^4.5.1",
@@ -55,13 +55,12 @@
     "semantic-release": "^8.2.0",
     "tsify": "^3.0.3",
     "tslint": "^5.8.0",
-    "typescript": "^2.5.3",
+    "typescript": "2.4.2",
     "wallaby-webpack": "^0.0.42",
     "watchify": "^3.9.0",
     "webpack": "3.8.1",
     "zone.js": "^0.8.18"
   },
-  "typings": "./index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/spirosikmd/angular2-elastic-input"
