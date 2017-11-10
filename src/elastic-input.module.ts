@@ -1,14 +1,11 @@
-import {NgModule, ModuleWithProviders} from '@angular/core';
-import {ElasticInputDirective} from './elastic-input.directive';
+import { NgModule } from '@angular/core';
+import { ElasticInputDirective } from './elastic-input.directive';
 
 @NgModule({
-  declarations: [ElasticInputDirective],
-  exports: [ElasticInputDirective]
+  imports: [],
+  declarations: [ ElasticInputDirective ],
+  exports: [ ElasticInputDirective ],
+  providers: []
 })
-export class ElasticInputModule {
-  static forRoot (): ModuleWithProviders {
-    return {
-      ngModule: ElasticInputModule
-    };
-  }
-}
+
+export class ElasticInputModule {}
