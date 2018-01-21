@@ -2,13 +2,16 @@
   "name": "angular2-elastic-input",
   "version": "0.0.0-development",
   "description": "Angular attribute directive that adjusts the width of a text input while typing",
-  "main": "index.js",
-  "module": "index.js",
+  "main": "dist/bundles/angular2-elastic-input.umd.js",
+  "module": "dist/angular2-elastic-input.es5.js",
+  "es2015": "dist/angular2-elastic-input.js",
+  "typings": "./dist/index.d.ts",
   "scripts": {
     "test": "karma start",
     "lint": "tslint -c tslint.json 'index.ts src/**/*.ts docs/**/*.ts'",
     "start": "ngc",
-    "prepublish": "ngc",
+    "build": "ng-packagr -p package.json",
+    "prepare": "yarn build",
     "docs": "concurrently \"watchify docs/main.ts -p [ tsify ] -o docs/bundle.js\" \"lite-server\"",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "commit": "git-cz",
@@ -24,13 +27,14 @@
   ],
   "author": "Spyros Ioakeimidis <spyrosikmd@gmail.com> (http://www.spyros.io)",
   "license": "MIT",
-  "dependencies": {
+  "peerDependencies": {
     "@angular/core": "^5.0.1"
   },
   "devDependencies": {
     "@angular/common": "^5.0.1",
     "@angular/compiler": "^5.0.1",
     "@angular/compiler-cli": "^5.0.1",
+    "@angular/core": "^5.0.1",
     "@angular/platform-browser": "^5.0.1",
     "@angular/platform-browser-dynamic": "^5.0.1",
     "@angular/platform-server": "^5.0.1",
@@ -50,6 +54,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.5",
     "lite-server": "^2.3.0",
+    "ng-packagr": "^1.6.0",
     "null-loader": "^0.1.1",
     "rxjs": "^5.5.0",
     "semantic-release": "^8.2.0",
@@ -61,7 +66,6 @@
     "webpack": "3.8.1",
     "zone.js": "^0.8.18"
   },
-  "typings": "./index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/spirosikmd/angular2-elastic-input"
@@ -69,6 +73,11 @@
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "index.ts"
     }
   }
 }
