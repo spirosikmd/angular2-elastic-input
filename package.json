@@ -32,6 +32,7 @@
     "@angular/core": "^5.0.1"
   },
   "devDependencies": {
+    "@angular/animations": "^5.0.1",
     "@angular/common": "^5.0.1",
     "@angular/compiler": "^5.0.1",
     "@angular/compiler-cli": "^5.0.1",
@@ -59,14 +60,14 @@
     "null-loader": "^0.1.1",
     "rxjs": "^5.5.0",
     "semantic-release": "^12.2.2",
+    "travis-deploy-once": "^4.3.2",
     "tsify": "^3.0.3",
     "tslint": "^5.8.0",
     "typescript": "^2.5.3",
     "wallaby-webpack": "^0.0.42",
     "watchify": "^3.9.0",
-    "webpack": "3.8.1",
-    "zone.js": "^0.8.18",
-    "travis-deploy-once": "^4.3.2"
+    "webpack": "^3.10.0",
+    "zone.js": "^0.8.18"
   },
   "repository": {
     "type": "git",
