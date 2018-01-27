@@ -5,7 +5,7 @@
   "main": "dist/bundles/angular2-elastic-input.umd.js",
   "module": "dist/angular2-elastic-input.es5.js",
   "es2015": "dist/angular2-elastic-input.js",
-  "typings": "./dist/index.d.ts",
+  "typings": "dist/angular2-elastic-input.d.ts",
   "scripts": {
     "test": "karma start",
     "lint": "tslint -c tslint.json 'index.ts src/**/*.ts docs/**/*.ts'",
