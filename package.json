@@ -44,7 +44,7 @@
     "@types/jasmine": "^2.6.0",
     "all-contributors-cli": "^4.5.1",
     "awesome-typescript-loader": "^3.2.3",
-    "browserify": "^14.5.0",
+    "browserify": "^16.1.0",
     "commitizen": "^2.9.6",
     "concurrently": "^3.5.0",
     "core-js": "^2.5.1",
