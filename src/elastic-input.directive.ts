@@ -37,6 +37,10 @@ export class ElasticInputDirective implements OnInit {
     this.update();
   }
 
+  ngAfterViewChecked() {
+    this.update();
+  }
+
   ngOnDestroy (): void {
     this.mirror.remove();
     this.wrapper.remove();
