@@ -191,7 +191,7 @@ platform.bootstrapModule(app_module_1.AppModule);
 
 },{"./app.module":3,"@angular/core":7,"@angular/platform-browser-dynamic":8,"core-js/es7/reflect":10,"zone.js/dist/zone":130}],5:[function(require,module,exports){
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -236,7 +236,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1138,7 +1138,7 @@ var CURRENCIES = {
  * @param {?} n
  * @return {?}
  */
-function converter(n) {
+function plural(n) {
     var /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
     if (i === 1 && v === 0)
         return 1;
@@ -1178,7 +1178,7 @@ var localeEn = [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', converter
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', plural
 ];
 
 /**
@@ -1455,7 +1455,7 @@ function getLocaleWeekEndRange(locale) {
  */
 function getLocaleDateFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[10 /* DateFormat */][width];
+    return getLastDefinedValue(data[10 /* DateFormat */], width);
 }
 /**
  * Time format that depends on the locale.
@@ -1482,7 +1482,7 @@ function getLocaleDateFormat(locale, width) {
  */
 function getLocaleTimeFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[11 /* TimeFormat */][width];
+    return getLastDefinedValue(data[11 /* TimeFormat */], width);
 }
 /**
  * Date-time format that depends on the locale.
@@ -3637,7 +3637,12 @@ var NgStyle = /** @class */ (function () {
     function (nameAndUnit, value) {
         var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
         value = value != null && unit ? "" + value + unit : value;
-        this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        if (value != null) {
+            this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        }
+        else {
+            this._renderer.removeStyle(this._ngEl.nativeElement, name);
+        }
     };
     NgStyle.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },
@@ -6754,7 +6759,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.2.1');
+var VERSION = new _angular_core.Version('5.2.2');
 
 exports.ɵregisterLocaleData = registerLocaleData;
 exports.NgLocaleLocalization = NgLocaleLocalization;
@@ -6848,7 +6853,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 },{"@angular/core":7}],6:[function(require,module,exports){
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -6893,7 +6898,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -7525,7 +7530,7 @@ var Version = /** @class */ (function () {
 /**
  * \@stable
  */
-var VERSION = new Version('5.2.1');
+var VERSION = new Version('5.2.2');
 
 /**
  * @fileoverview added by tsickle
@@ -18494,8 +18499,10 @@ var _XMLNS = 'urn:oasis:names:tc:xliff:document:1.2';
 // TODO(vicb): make this a param (s/_/-/)
 var _DEFAULT_SOURCE_LANG = 'en';
 var _PLACEHOLDER_TAG = 'x';
+var _MARKER_TAG = 'mrk';
 var _FILE_TAG = 'file';
 var _SOURCE_TAG = 'source';
+var _SEGMENT_SOURCE_TAG = 'seg-source';
 var _TARGET_TAG = 'target';
 var _UNIT_TAG = 'trans-unit';
 var _CONTEXT_GROUP_TAG = 'context-group';
@@ -18756,8 +18763,9 @@ var XliffParser = /** @class */ (function () {
                     }
                 }
                 break;
+            // ignore those tags
             case _SOURCE_TAG:
-                // ignore source message
+            case _SEGMENT_SOURCE_TAG:
                 break;
             case _TARGET_TAG:
                 var /** @type {?} */ innerTextStart = /** @type {?} */ ((element.startSourceSpan)).end.offset;
@@ -18866,8 +18874,7 @@ var XmlToI18n = /** @class */ (function () {
         var /** @type {?} */ xmlIcu = new XmlParser().parse(message, url, true);
         this._errors = xmlIcu.errors;
         var /** @type {?} */ i18nNodes = this._errors.length > 0 || xmlIcu.rootNodes.length == 0 ?
-            [] :
-            visitAll(this, xmlIcu.rootNodes);
+            [] : [].concat.apply([], visitAll(this, xmlIcu.rootNodes));
         return {
             i18nNodes: i18nNodes,
             errors: this._errors,
@@ -18901,10 +18908,12 @@ var XmlToI18n = /** @class */ (function () {
                 return new Placeholder('', nameAttr.value, /** @type {?} */ ((el.sourceSpan)));
             }
             this._addError(el, "<" + _PLACEHOLDER_TAG + "> misses the \"id\" attribute");
+            return null;
         }
-        else {
-            this._addError(el, "Unexpected tag");
+        if (el.name === _MARKER_TAG) {
+            return [].concat.apply([], visitAll(this, el.children));
         }
+        this._addError(el, "Unexpected tag");
         return null;
     };
     /**
@@ -19009,6 +19018,7 @@ var _XMLNS$1 = 'urn:oasis:names:tc:xliff:document:2.0';
 var _DEFAULT_SOURCE_LANG$1 = 'en';
 var _PLACEHOLDER_TAG$1 = 'ph';
 var _PLACEHOLDER_SPANNING_TAG = 'pc';
+var _MARKER_TAG$1 = 'mrk';
 var _XLIFF_TAG = 'xliff';
 var _SOURCE_TAG$1 = 'source';
 var _TARGET_TAG$1 = 'target';
@@ -19464,6 +19474,8 @@ var XmlToI18n$1 = /** @class */ (function () {
                     return nodes.concat.apply(nodes, [new Placeholder('', startId, el.sourceSpan)].concat(el.children.map(function (node) { return node.visit(_this, null); }), [new Placeholder('', endId, el.sourceSpan)]));
                 }
                 break;
+            case _MARKER_TAG$1:
+                return [].concat.apply([], visitAll(this, el.children));
             default:
                 this._addError(el, "Unexpected tag");
         }
@@ -29712,10 +29724,11 @@ var ShadowCss = /** @class */ (function () {
      */
     function (cssText, selector, hostSelector) {
         if (hostSelector === void 0) { hostSelector = ''; }
-        var /** @type {?} */ sourceMappingUrl = extractSourceMappingUrl(cssText);
+        var /** @type {?} */ commentsWithHash = extractCommentsWithHash(cssText);
         cssText = stripComments(cssText);
         cssText = this._insertDirectives(cssText);
-        return this._scopeCssText(cssText, selector, hostSelector) + sourceMappingUrl;
+        var /** @type {?} */ scopedCssText = this._scopeCssText(cssText, selector, hostSelector);
+        return [scopedCssText].concat(commentsWithHash).join('\n');
     };
     /**
      * @param {?} cssText
@@ -30215,15 +30228,13 @@ var _commentRe = /\/\*\s*[\s\S]*?\*\//g;
 function stripComments(input) {
     return input.replace(_commentRe, '');
 }
-// all comments except inline source mapping
-var _sourceMappingUrlRe = /\/\*\s*#\s*sourceMappingURL=[\s\S]+?\*\//;
+var _commentWithHashRe = /\/\*\s*#\s*source(Mapping)?URL=[\s\S]+?\*\//g;
 /**
  * @param {?} input
  * @return {?}
  */
-function extractSourceMappingUrl(input) {
-    var /** @type {?} */ matcher = input.match(_sourceMappingUrlRe);
-    return matcher ? matcher[0] : '';
+function extractCommentsWithHash(input) {
+    return input.match(_commentWithHashRe) || [];
 }
 var _ruleRe = /(\s*)([^;\{\}]+?)(\s*)((?:{%BLOCK%}?\s*;?)|(?:\s*;))/g;
 var _curlyRe = /([{}])/g;
@@ -42304,7 +42315,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 },{}],7:[function(require,module,exports){
 (function (global){
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -42349,7 +42360,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -43060,7 +43071,7 @@ var Version = /** @class */ (function () {
 /**
  * \@stable
  */
-var VERSION = new Version('5.2.1');
+var VERSION = new Version('5.2.2');
 
 /**
  * @fileoverview added by tsickle
@@ -47306,23 +47317,13 @@ var Testability = /** @class */ (function () {
     function () {
         var _this = this;
         if (this.isStable()) {
-            if (this._callbacks.length !== 0) {
-                // Schedules the call backs after a macro task run outside of the angular zone to make sure
-                // no new task are added
-                this._ngZone.runOutsideAngular(function () {
-                    setTimeout(function () {
-                        if (_this.isStable()) {
-                            while (_this._callbacks.length !== 0) {
-                                (/** @type {?} */ ((_this._callbacks.pop())))(_this._didWork);
-                            }
-                            _this._didWork = false;
-                        }
-                    });
-                });
-            }
-            else {
-                this._didWork = false;
-            }
+            // Schedules the call backs in a new frame so that it is always async.
+            scheduleMicroTask(function () {
+                while (_this._callbacks.length !== 0) {
+                    (/** @type {?} */ ((_this._callbacks.pop())))(_this._didWork);
+                }
+                _this._didWork = false;
+            });
         }
         else {
             // Not Ready
@@ -61608,35 +61609,36 @@ exports.style = style$$1;
 exports.state = state$$1;
 exports.keyframes = keyframes$$1;
 exports.transition = transition$$1;
-exports.ɵbe = animate$1;
-exports.ɵbf = group$1;
-exports.ɵbj = keyframes$1;
-exports.ɵbg = sequence$1;
-exports.ɵbi = state$1;
-exports.ɵbh = style$1;
-exports.ɵbk = transition$1;
-exports.ɵbd = trigger$1;
-exports.ɵm = _iterableDiffersFactory;
-exports.ɵn = _keyValueDiffersFactory;
-exports.ɵo = _localeFactory;
-exports.ɵh = _appIdRandomProviderFactory;
-exports.ɵi = defaultIterableDiffers;
-exports.ɵj = defaultKeyValueDiffers;
-exports.ɵk = DefaultIterableDifferFactory;
-exports.ɵl = DefaultKeyValueDifferFactory;
-exports.ɵd = ReflectiveInjector_;
-exports.ɵf = ReflectiveDependency;
-exports.ɵg = resolveReflectiveProviders;
-exports.ɵq = wtfEnabled;
-exports.ɵu = createScope;
-exports.ɵr = detectWTF;
-exports.ɵy = endTimeRange;
-exports.ɵw = leave;
-exports.ɵx = startTimeRange;
-exports.ɵbb = stringify$1;
+exports.ɵbf = animate$1;
+exports.ɵbg = group$1;
+exports.ɵbk = keyframes$1;
+exports.ɵbh = sequence$1;
+exports.ɵbj = state$1;
+exports.ɵbi = style$1;
+exports.ɵbl = transition$1;
+exports.ɵbe = trigger$1;
+exports.ɵn = _iterableDiffersFactory;
+exports.ɵo = _keyValueDiffersFactory;
+exports.ɵq = _localeFactory;
+exports.ɵi = _appIdRandomProviderFactory;
+exports.ɵj = defaultIterableDiffers;
+exports.ɵk = defaultKeyValueDiffers;
+exports.ɵl = DefaultIterableDifferFactory;
+exports.ɵm = DefaultKeyValueDifferFactory;
+exports.ɵf = ReflectiveInjector_;
+exports.ɵg = ReflectiveDependency;
+exports.ɵh = resolveReflectiveProviders;
+exports.ɵr = wtfEnabled;
+exports.ɵw = createScope;
+exports.ɵu = detectWTF;
+exports.ɵz = endTimeRange;
+exports.ɵx = leave;
+exports.ɵy = startTimeRange;
+exports.ɵbc = stringify$1;
 exports.ɵa = makeParamDecorator;
-exports.ɵz = _def;
-exports.ɵba = DebugContext;
+exports.ɵd = makePropDecorator;
+exports.ɵba = _def;
+exports.ɵbb = DebugContext;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
@@ -61646,7 +61648,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"rxjs/Observable":93,"rxjs/Subject":96,"rxjs/observable/merge":104,"rxjs/operator/share":105}],8:[function(require,module,exports){
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -61683,7 +61685,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -62329,7 +62331,7 @@ var CachedResourceLoader = /** @class */ (function (_super) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.2.1');
+var VERSION = new _angular_core.Version('5.2.2');
 
 /**
  * @fileoverview added by tsickle
@@ -62368,7 +62370,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 },{"@angular/common":5,"@angular/compiler":6,"@angular/core":7,"@angular/platform-browser":9}],9:[function(require,module,exports){
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -62413,7 +62415,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.2
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -67601,7 +67603,7 @@ var By = /** @class */ (function () {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.2.1');
+var VERSION = new _angular_core.Version('5.2.2');
 
 exports.BrowserModule = BrowserModule;
 exports.platformBrowser = platformBrowser;
