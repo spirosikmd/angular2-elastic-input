@@ -25,6 +25,14 @@ describe('elastic-input', function () {
     });
   });
 
+  describe('ngAfterViewChecked', function () {
+    it('calls update', function () {
+      spyOn(this.directive, 'update');
+      this.directive.ngAfterViewChecked();
+      expect(this.directive.update).toHaveBeenCalled();
+    });
+  });
+
   describe('ngOnDestroy', function () {
     it('removes mirror and wrapper', function () {
       this.directive.mirror = jasmine.createSpyObj('mirror', ['remove']);
