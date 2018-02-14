@@ -37,7 +37,7 @@ export class ElasticInputDirective implements OnInit {
     this.update();
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     this.update();
   }
 
