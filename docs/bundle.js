@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
 	typeof define === 'function' && define.amd ? define(['exports', '@angular/core'], factory) :
@@ -37,6 +37,12 @@ var ElasticInputDirective = /** @class */ (function () {
      * @return {?}
      */
     ElasticInputDirective.prototype.ngAfterContentChecked = function () {
+        this.update();
+    };
+    /**
+     * @return {?}
+     */
+    ElasticInputDirective.prototype.ngAfterViewChecked = function () {
         this.update();
     };
     /**
@@ -191,7 +197,7 @@ platform.bootstrapModule(app_module_1.AppModule);
 
 },{"./app.module":3,"@angular/core":7,"@angular/platform-browser-dynamic":8,"core-js/es7/reflect":10,"zone.js/dist/zone":130}],5:[function(require,module,exports){
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -236,7 +242,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1138,7 +1144,7 @@ var CURRENCIES = {
  * @param {?} n
  * @return {?}
  */
-function converter(n) {
+function plural(n) {
     var /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
     if (i === 1 && v === 0)
         return 1;
@@ -1178,7 +1184,7 @@ var localeEn = [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', converter
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', plural
 ];
 
 /**
@@ -1455,7 +1461,7 @@ function getLocaleWeekEndRange(locale) {
  */
 function getLocaleDateFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[10 /* DateFormat */][width];
+    return getLastDefinedValue(data[10 /* DateFormat */], width);
 }
 /**
  * Time format that depends on the locale.
@@ -1482,7 +1488,7 @@ function getLocaleDateFormat(locale, width) {
  */
 function getLocaleTimeFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return data[11 /* TimeFormat */][width];
+    return getLastDefinedValue(data[11 /* TimeFormat */], width);
 }
 /**
  * Date-time format that depends on the locale.
@@ -3637,7 +3643,12 @@ var NgStyle = /** @class */ (function () {
     function (nameAndUnit, value) {
         var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
         value = value != null && unit ? "" + value + unit : value;
-        this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        if (value != null) {
+            this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        }
+        else {
+            this._renderer.removeStyle(this._ngEl.nativeElement, name);
+        }
     };
     NgStyle.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },
@@ -3681,7 +3692,7 @@ var NgStyle = /** @class */ (function () {
  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
  * by the local template `let` declarations.
  *
- * Note: using the key `$implicit` in the context object will set it's value as default.
+ * Note: using the key `$implicit` in the context object will set its value as default.
  *
  * ## Example
  *
@@ -6754,7 +6765,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.2.1');
+var VERSION = new _angular_core.Version('5.2.5');
 
 exports.ɵregisterLocaleData = registerLocaleData;
 exports.NgLocaleLocalization = NgLocaleLocalization;
@@ -6848,7 +6859,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 },{"@angular/core":7}],6:[function(require,module,exports){
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -6893,7 +6904,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -7525,7 +7536,7 @@ var Version = /** @class */ (function () {
 /**
  * \@stable
  */
-var VERSION = new Version('5.2.1');
+var VERSION = new Version('5.2.5');
 
 /**
  * @fileoverview added by tsickle
@@ -13649,7 +13660,8 @@ var _ParseAST = /** @class */ (function () {
             switch (operator) {
                 case '+':
                     this.advance();
-                    return this.parsePrefix();
+                    result = this.parsePrefix();
+                    return new Binary(this.span(start), '-', result, new LiteralPrimitive(new ParseSpan(start, start), 0));
                 case '-':
                     this.advance();
                     result = this.parsePrefix();
@@ -18494,8 +18506,10 @@ var _XMLNS = 'urn:oasis:names:tc:xliff:document:1.2';
 // TODO(vicb): make this a param (s/_/-/)
 var _DEFAULT_SOURCE_LANG = 'en';
 var _PLACEHOLDER_TAG = 'x';
+var _MARKER_TAG = 'mrk';
 var _FILE_TAG = 'file';
 var _SOURCE_TAG = 'source';
+var _SEGMENT_SOURCE_TAG = 'seg-source';
 var _TARGET_TAG = 'target';
 var _UNIT_TAG = 'trans-unit';
 var _CONTEXT_GROUP_TAG = 'context-group';
@@ -18756,8 +18770,9 @@ var XliffParser = /** @class */ (function () {
                     }
                 }
                 break;
+            // ignore those tags
             case _SOURCE_TAG:
-                // ignore source message
+            case _SEGMENT_SOURCE_TAG:
                 break;
             case _TARGET_TAG:
                 var /** @type {?} */ innerTextStart = /** @type {?} */ ((element.startSourceSpan)).end.offset;
@@ -18866,8 +18881,7 @@ var XmlToI18n = /** @class */ (function () {
         var /** @type {?} */ xmlIcu = new XmlParser().parse(message, url, true);
         this._errors = xmlIcu.errors;
         var /** @type {?} */ i18nNodes = this._errors.length > 0 || xmlIcu.rootNodes.length == 0 ?
-            [] :
-            visitAll(this, xmlIcu.rootNodes);
+            [] : [].concat.apply([], visitAll(this, xmlIcu.rootNodes));
         return {
             i18nNodes: i18nNodes,
             errors: this._errors,
@@ -18901,10 +18915,12 @@ var XmlToI18n = /** @class */ (function () {
                 return new Placeholder('', nameAttr.value, /** @type {?} */ ((el.sourceSpan)));
             }
             this._addError(el, "<" + _PLACEHOLDER_TAG + "> misses the \"id\" attribute");
+            return null;
         }
-        else {
-            this._addError(el, "Unexpected tag");
+        if (el.name === _MARKER_TAG) {
+            return [].concat.apply([], visitAll(this, el.children));
         }
+        this._addError(el, "Unexpected tag");
         return null;
     };
     /**
@@ -19009,6 +19025,7 @@ var _XMLNS$1 = 'urn:oasis:names:tc:xliff:document:2.0';
 var _DEFAULT_SOURCE_LANG$1 = 'en';
 var _PLACEHOLDER_TAG$1 = 'ph';
 var _PLACEHOLDER_SPANNING_TAG = 'pc';
+var _MARKER_TAG$1 = 'mrk';
 var _XLIFF_TAG = 'xliff';
 var _SOURCE_TAG$1 = 'source';
 var _TARGET_TAG$1 = 'target';
@@ -19464,6 +19481,8 @@ var XmlToI18n$1 = /** @class */ (function () {
                     return nodes.concat.apply(nodes, [new Placeholder('', startId, el.sourceSpan)].concat(el.children.map(function (node) { return node.visit(_this, null); }), [new Placeholder('', endId, el.sourceSpan)]));
                 }
                 break;
+            case _MARKER_TAG$1:
+                return [].concat.apply([], visitAll(this, el.children));
             default:
                 this._addError(el, "Unexpected tag");
         }
@@ -29712,10 +29731,11 @@ var ShadowCss = /** @class */ (function () {
      */
     function (cssText, selector, hostSelector) {
         if (hostSelector === void 0) { hostSelector = ''; }
-        var /** @type {?} */ sourceMappingUrl = extractSourceMappingUrl(cssText);
+        var /** @type {?} */ commentsWithHash = extractCommentsWithHash(cssText);
         cssText = stripComments(cssText);
         cssText = this._insertDirectives(cssText);
-        return this._scopeCssText(cssText, selector, hostSelector) + sourceMappingUrl;
+        var /** @type {?} */ scopedCssText = this._scopeCssText(cssText, selector, hostSelector);
+        return [scopedCssText].concat(commentsWithHash).join('\n');
     };
     /**
      * @param {?} cssText
@@ -30215,15 +30235,13 @@ var _commentRe = /\/\*\s*[\s\S]*?\*\//g;
 function stripComments(input) {
     return input.replace(_commentRe, '');
 }
-// all comments except inline source mapping
-var _sourceMappingUrlRe = /\/\*\s*#\s*sourceMappingURL=[\s\S]+?\*\//;
+var _commentWithHashRe = /\/\*\s*#\s*source(Mapping)?URL=[\s\S]+?\*\//g;
 /**
  * @param {?} input
  * @return {?}
  */
-function extractSourceMappingUrl(input) {
-    var /** @type {?} */ matcher = input.match(_sourceMappingUrlRe);
-    return matcher ? matcher[0] : '';
+function extractCommentsWithHash(input) {
+    return input.match(_commentWithHashRe) || [];
 }
 var _ruleRe = /(\s*)([^;\{\}]+?)(\s*)((?:{%BLOCK%}?\s*;?)|(?:\s*;))/g;
 var _curlyRe = /([{}])/g;
@@ -42304,15 +42322,15 @@ Object.defineProperty(exports, '__esModule', { value: true });
 },{}],7:[function(require,module,exports){
 (function (global){
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs/Observable'), require('rxjs/observable/merge'), require('rxjs/operator/share'), require('rxjs/Subject')) :
-	typeof define === 'function' && define.amd ? define('@angular/core', ['exports', 'rxjs/Observable', 'rxjs/observable/merge', 'rxjs/operator/share', 'rxjs/Subject'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.core = {}),global.Rx,global.Rx.Observable,global.Rx.Observable.prototype,global.Rx));
-}(this, (function (exports,rxjs_Observable,rxjs_observable_merge,rxjs_operator_share,rxjs_Subject) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs/Observable'), require('rxjs/observable/merge'), require('rxjs/operator/share'), require('rxjs/Subject'), require('rxjs/Subscription')) :
+	typeof define === 'function' && define.amd ? define('@angular/core', ['exports', 'rxjs/Observable', 'rxjs/observable/merge', 'rxjs/operator/share', 'rxjs/Subject', 'rxjs/Subscription'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.core = {}),global.Rx,global.Rx.Observable,global.Rx.Observable.prototype,global.Rx,global.Rx));
+}(this, (function (exports,rxjs_Observable,rxjs_observable_merge,rxjs_operator_share,rxjs_Subject,rxjs_Subscription) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -42349,7 +42367,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -43060,7 +43078,7 @@ var Version = /** @class */ (function () {
 /**
  * \@stable
  */
-var VERSION = new Version('5.2.1');
+var VERSION = new Version('5.2.5');
 
 /**
  * @fileoverview added by tsickle
@@ -43174,6 +43192,7 @@ var __self = typeof self !== 'undefined' && typeof WorkerGlobalScope !== 'undefi
     self instanceof WorkerGlobalScope && self;
 var __global = typeof global !== 'undefined' && global;
 var _global = __window || __global || __self;
+var promise = Promise.resolve(0);
 var _symbolIterator = null;
 /**
  * @return {?}
@@ -43203,7 +43222,13 @@ function getSymbolIterator() {
  * @return {?}
  */
 function scheduleMicroTask(fn) {
-    Zone.current.scheduleMicroTask('scheduleMicrotask', fn);
+    if (typeof Zone === 'undefined') {
+        // use promise to schedule microTask instead of use Zone
+        promise.then(function () { fn && fn.apply(null, null); });
+    }
+    else {
+        Zone.current.scheduleMicroTask('scheduleMicrotask', fn);
+    }
 }
 /**
  * @param {?} a
@@ -46682,7 +46707,11 @@ var EventEmitter = /** @class */ (function (_super) {
                     this.__isAsync ? function () { setTimeout(function () { return complete(); }); } : function () { complete(); };
             }
         }
-        return _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
+        var /** @type {?} */ sink = _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
+        if (generatorOrNext instanceof rxjs_Subscription.Subscription) {
+            generatorOrNext.add(sink);
+        }
+        return sink;
     };
     return EventEmitter;
 }(rxjs_Subject.Subject));
@@ -47306,23 +47335,13 @@ var Testability = /** @class */ (function () {
     function () {
         var _this = this;
         if (this.isStable()) {
-            if (this._callbacks.length !== 0) {
-                // Schedules the call backs after a macro task run outside of the angular zone to make sure
-                // no new task are added
-                this._ngZone.runOutsideAngular(function () {
-                    setTimeout(function () {
-                        if (_this.isStable()) {
-                            while (_this._callbacks.length !== 0) {
-                                (/** @type {?} */ ((_this._callbacks.pop())))(_this._didWork);
-                            }
-                            _this._didWork = false;
-                        }
-                    });
-                });
-            }
-            else {
-                this._didWork = false;
-            }
+            // Schedules the call backs in a new frame so that it is always async.
+            scheduleMicroTask(function () {
+                while (_this._callbacks.length !== 0) {
+                    (/** @type {?} */ ((_this._callbacks.pop())))(_this._didWork);
+                }
+                _this._didWork = false;
+            });
         }
         else {
             // Not Ready
@@ -48631,6 +48650,7 @@ var QueryList = /** @class */ (function () {
         this.dirty = true;
         this._results = [];
         this.changes = new EventEmitter();
+        this.length = 0;
     }
     /**
      * See
@@ -52253,7 +52273,7 @@ function checkAndUpdateBinding(view, def, bindingIdx, value) {
 function checkBindingNoChanges(view, def, bindingIdx, value) {
     var /** @type {?} */ oldValue = view.oldValues[def.bindingIndex + bindingIdx];
     if ((view.state & 1 /* BeforeFirstCheck */) || !devModeEqual(oldValue, value)) {
-        var /** @type {?} */ bindingName = def.bindings[def.bindingIndex].name;
+        var /** @type {?} */ bindingName = def.bindings[bindingIdx].name;
         throw expressionChangedAfterItHasBeenCheckedError(Services.createDebugContext(view, def.nodeIndex), bindingName + ": " + oldValue, bindingName + ": " + value, (view.state & 1 /* BeforeFirstCheck */) !== 0);
     }
 }
@@ -60452,7 +60472,7 @@ function invertObject(obj) {
  * The `\@childAnimation` trigger will not animate because `\@.disabled` prevents it from happening
  * (when true).
  *
- * Note that `\@.disbled` will only disable all animations (this means any animations running on
+ * Note that `\@.disabled` will only disable all animations (this means any animations running on
  * the same element will also be disabled).
  *
  * ### Disabling Animations Application-wide
@@ -61608,35 +61628,36 @@ exports.style = style$$1;
 exports.state = state$$1;
 exports.keyframes = keyframes$$1;
 exports.transition = transition$$1;
-exports.ɵbe = animate$1;
-exports.ɵbf = group$1;
-exports.ɵbj = keyframes$1;
-exports.ɵbg = sequence$1;
-exports.ɵbi = state$1;
-exports.ɵbh = style$1;
-exports.ɵbk = transition$1;
-exports.ɵbd = trigger$1;
-exports.ɵm = _iterableDiffersFactory;
-exports.ɵn = _keyValueDiffersFactory;
-exports.ɵo = _localeFactory;
-exports.ɵh = _appIdRandomProviderFactory;
-exports.ɵi = defaultIterableDiffers;
-exports.ɵj = defaultKeyValueDiffers;
-exports.ɵk = DefaultIterableDifferFactory;
-exports.ɵl = DefaultKeyValueDifferFactory;
-exports.ɵd = ReflectiveInjector_;
-exports.ɵf = ReflectiveDependency;
-exports.ɵg = resolveReflectiveProviders;
-exports.ɵq = wtfEnabled;
-exports.ɵu = createScope;
-exports.ɵr = detectWTF;
-exports.ɵy = endTimeRange;
-exports.ɵw = leave;
-exports.ɵx = startTimeRange;
-exports.ɵbb = stringify$1;
+exports.ɵbf = animate$1;
+exports.ɵbg = group$1;
+exports.ɵbk = keyframes$1;
+exports.ɵbh = sequence$1;
+exports.ɵbj = state$1;
+exports.ɵbi = style$1;
+exports.ɵbl = transition$1;
+exports.ɵbe = trigger$1;
+exports.ɵn = _iterableDiffersFactory;
+exports.ɵo = _keyValueDiffersFactory;
+exports.ɵq = _localeFactory;
+exports.ɵi = _appIdRandomProviderFactory;
+exports.ɵj = defaultIterableDiffers;
+exports.ɵk = defaultKeyValueDiffers;
+exports.ɵl = DefaultIterableDifferFactory;
+exports.ɵm = DefaultKeyValueDifferFactory;
+exports.ɵf = ReflectiveInjector_;
+exports.ɵg = ReflectiveDependency;
+exports.ɵh = resolveReflectiveProviders;
+exports.ɵr = wtfEnabled;
+exports.ɵw = createScope;
+exports.ɵu = detectWTF;
+exports.ɵz = endTimeRange;
+exports.ɵx = leave;
+exports.ɵy = startTimeRange;
+exports.ɵbc = stringify$1;
 exports.ɵa = makeParamDecorator;
-exports.ɵz = _def;
-exports.ɵba = DebugContext;
+exports.ɵd = makePropDecorator;
+exports.ɵba = _def;
+exports.ɵbb = DebugContext;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
@@ -61644,9 +61665,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"rxjs/Observable":93,"rxjs/Subject":96,"rxjs/observable/merge":104,"rxjs/operator/share":105}],8:[function(require,module,exports){
+},{"rxjs/Observable":93,"rxjs/Subject":96,"rxjs/Subscription":99,"rxjs/observable/merge":104,"rxjs/operator/share":105}],8:[function(require,module,exports){
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -61683,7 +61704,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -62329,7 +62350,7 @@ var CachedResourceLoader = /** @class */ (function (_super) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.2.1');
+var VERSION = new _angular_core.Version('5.2.5');
 
 /**
  * @fileoverview added by tsickle
@@ -62368,7 +62389,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 },{"@angular/common":5,"@angular/compiler":6,"@angular/core":7,"@angular/platform-browser":9}],9:[function(require,module,exports){
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -62413,7 +62434,7 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.2.1
+ * @license Angular v5.2.5
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -66140,6 +66161,207 @@ var KeyEventsPlugin = /** @class */ (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * This helper class is used to get hold of an inert tree of DOM elements containing dirty HTML
+ * that needs sanitizing.
+ * Depending upon browser support we must use one of three strategies for doing this.
+ * Support: Safari 10.x -> XHR strategy
+ * Support: Firefox -> DomParser strategy
+ * Default: InertDocument strategy
+ */
+var InertBodyHelper = /** @class */ (function () {
+    function InertBodyHelper(defaultDoc, DOM) {
+        this.defaultDoc = defaultDoc;
+        this.DOM = DOM;
+        var /** @type {?} */ inertDocument = this.DOM.createHtmlDocument();
+        this.inertBodyElement = inertDocument.body;
+        if (this.inertBodyElement == null) {
+            // usually there should be only one body element in the document, but IE doesn't have any, so
+            // we need to create one.
+            var /** @type {?} */ inertHtml = this.DOM.createElement('html', inertDocument);
+            this.inertBodyElement = this.DOM.createElement('body', inertDocument);
+            this.DOM.appendChild(inertHtml, this.inertBodyElement);
+            this.DOM.appendChild(inertDocument, inertHtml);
+        }
+        this.DOM.setInnerHTML(this.inertBodyElement, '<svg><g onload="this.parentNode.remove()"></g></svg>');
+        if (this.inertBodyElement.querySelector && !this.inertBodyElement.querySelector('svg')) {
+            // We just hit the Safari 10.1 bug - which allows JS to run inside the SVG G element
+            // so use the XHR strategy.
+            this.getInertBodyElement = this.getInertBodyElement_XHR;
+            return;
+        }
+        this.DOM.setInnerHTML(this.inertBodyElement, '<svg><p><style><img src="</style><img src=x onerror=alert(1)//">');
+        if (this.inertBodyElement.querySelector && this.inertBodyElement.querySelector('svg img')) {
+            // We just hit the Firefox bug - which prevents the inner img JS from being sanitized
+            // so use the DOMParser strategy, if it is available.
+            // If the DOMParser is not available then we are not in Firefox (Server/WebWorker?) so we
+            // fall through to the default strategy below.
+            if (isDOMParserAvailable()) {
+                this.getInertBodyElement = this.getInertBodyElement_DOMParser;
+                return;
+            }
+        }
+        // None of the bugs were hit so it is safe for us to use the default InertDocument strategy
+        this.getInertBodyElement = this.getInertBodyElement_InertDocument;
+    }
+    /**
+     * Use XHR to create and fill an inert body element (on Safari 10.1)
+     * See
+     * https://github.com/cure53/DOMPurify/blob/a992d3a75031cb8bb032e5ea8399ba972bdf9a65/src/purify.js#L439-L449
+     * @param {?} html
+     * @return {?}
+     */
+    InertBodyHelper.prototype.getInertBodyElement_XHR = /**
+     * Use XHR to create and fill an inert body element (on Safari 10.1)
+     * See
+     * https://github.com/cure53/DOMPurify/blob/a992d3a75031cb8bb032e5ea8399ba972bdf9a65/src/purify.js#L439-L449
+     * @param {?} html
+     * @return {?}
+     */
+    function (html) {
+        // We add these extra elements to ensure that the rest of the content is parsed as expected
+        // e.g. leading whitespace is maintained and tags like `<meta>` do not get hoisted to the
+        // `<head>` tag.
+        html = '<body><remove></remove>' + html + '</body>';
+        try {
+            html = encodeURI(html);
+        }
+        catch (/** @type {?} */ e) {
+            return null;
+        }
+        var /** @type {?} */ xhr = new XMLHttpRequest();
+        xhr.responseType = 'document';
+        xhr.open('GET', 'data:text/html;charset=utf-8,' + html, false);
+        xhr.send(null);
+        var /** @type {?} */ body = xhr.response.body;
+        body.removeChild(/** @type {?} */ ((body.firstChild)));
+        return body;
+    };
+    /**
+     * Use DOMParser to create and fill an inert body element (on Firefox)
+     * See https://github.com/cure53/DOMPurify/releases/tag/0.6.7
+     *
+     * @param {?} html
+     * @return {?}
+     */
+    InertBodyHelper.prototype.getInertBodyElement_DOMParser = /**
+     * Use DOMParser to create and fill an inert body element (on Firefox)
+     * See https://github.com/cure53/DOMPurify/releases/tag/0.6.7
+     *
+     * @param {?} html
+     * @return {?}
+     */
+    function (html) {
+        // We add these extra elements to ensure that the rest of the content is parsed as expected
+        // e.g. leading whitespace is maintained and tags like `<meta>` do not get hoisted to the
+        // `<head>` tag.
+        html = '<body><remove></remove>' + html + '</body>';
+        try {
+            var /** @type {?} */ body = /** @type {?} */ (new (/** @type {?} */ (window))
+                .DOMParser()
+                .parseFromString(html, 'text/html')
+                .body);
+            body.removeChild(/** @type {?} */ ((body.firstChild)));
+            return body;
+        }
+        catch (/** @type {?} */ e) {
+            return null;
+        }
+    };
+    /**
+     * Use an HTML5 `template` element, if supported, or an inert body element created via
+     * `createHtmlDocument` to create and fill an inert DOM element.
+     * This is the default sane strategy to use if the browser does not require one of the specialised
+     * strategies above.
+     * @param {?} html
+     * @return {?}
+     */
+    InertBodyHelper.prototype.getInertBodyElement_InertDocument = /**
+     * Use an HTML5 `template` element, if supported, or an inert body element created via
+     * `createHtmlDocument` to create and fill an inert DOM element.
+     * This is the default sane strategy to use if the browser does not require one of the specialised
+     * strategies above.
+     * @param {?} html
+     * @return {?}
+     */
+    function (html) {
+        // Prefer using <template> element if supported.
+        var /** @type {?} */ templateEl = this.DOM.createElement('template');
+        if ('content' in templateEl) {
+            this.DOM.setInnerHTML(templateEl, html);
+            return templateEl;
+        }
+        this.DOM.setInnerHTML(this.inertBodyElement, html);
+        // Support: IE 9-11 only
+        // strip custom-namespaced attributes on IE<=11
+        if (this.defaultDoc.documentMode) {
+            this.stripCustomNsAttrs(this.inertBodyElement);
+        }
+        return this.inertBodyElement;
+    };
+    /**
+     * When IE9-11 comes across an unknown namespaced attribute e.g. 'xlink:foo' it adds 'xmlns:ns1'
+     * attribute to declare ns1 namespace and prefixes the attribute with 'ns1' (e.g.
+     * 'ns1:xlink:foo').
+     *
+     * This is undesirable since we don't want to allow any of these custom attributes. This method
+     * strips them all.
+     * @param {?} el
+     * @return {?}
+     */
+    InertBodyHelper.prototype.stripCustomNsAttrs = /**
+     * When IE9-11 comes across an unknown namespaced attribute e.g. 'xlink:foo' it adds 'xmlns:ns1'
+     * attribute to declare ns1 namespace and prefixes the attribute with 'ns1' (e.g.
+     * 'ns1:xlink:foo').
+     *
+     * This is undesirable since we don't want to allow any of these custom attributes. This method
+     * strips them all.
+     * @param {?} el
+     * @return {?}
+     */
+    function (el) {
+        var _this = this;
+        this.DOM.attributeMap(el).forEach(function (_, attrName) {
+            if (attrName === 'xmlns:ns1' || attrName.indexOf('ns1:') === 0) {
+                _this.DOM.removeAttribute(el, attrName);
+            }
+        });
+        for (var _i = 0, _a = this.DOM.childNodesAsList(el); _i < _a.length; _i++) {
+            var n = _a[_i];
+            if (this.DOM.isElementNode(n))
+                this.stripCustomNsAttrs(/** @type {?} */ (n));
+        }
+    };
+    return InertBodyHelper;
+}());
+/**
+ * We need to determine whether the DOMParser exists in the global context.
+ * The try-catch is because, on some browsers, trying to access this property
+ * on window can actually throw an error.
+ *
+ * @suppress {uselessCode}
+ * @return {?}
+ */
+function isDOMParserAvailable() {
+    try {
+        return !!(/** @type {?} */ (window)).DOMParser;
+    }
+    catch (/** @type {?} */ e) {
+        return false;
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * A pattern that recognizes a commonly useful subset of URLs that are safe.
  *
  * This regular expression matches a subset of URLs that will not cause script
@@ -66203,38 +66425,6 @@ function sanitizeSrcset(srcset) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * A <body> element that can be safely used to parse untrusted HTML. Lazily initialized below.
- */
-var inertElement = null;
-/**
- * Lazily initialized to make sure the DOM adapter gets set before use.
- */
-var DOM = /** @type {?} */ ((null));
-/**
- * Returns an HTML element that is guaranteed to not execute code when creating elements in it.
- * @return {?}
- */
-function getInertElement() {
-    if (inertElement)
-        return inertElement;
-    DOM = getDOM();
-    // Prefer using <template> element if supported.
-    var /** @type {?} */ templateEl = DOM.createElement('template');
-    if ('content' in templateEl)
-        return templateEl;
-    var /** @type {?} */ doc = DOM.createHtmlDocument();
-    inertElement = DOM.querySelector(doc, 'body');
-    if (inertElement == null) {
-        // usually there should be only one body element in the document, but IE doesn't have any, so we
-        // need to create one.
-        var /** @type {?} */ html = DOM.createElement('html', doc);
-        inertElement = DOM.createElement('body', doc);
-        DOM.appendChild(html, inertElement);
-        DOM.appendChild(doc, html);
-    }
-    return inertElement;
-}
 /**
  * @param {?} tags
  * @return {?}
@@ -66310,6 +66500,7 @@ var SanitizingHtmlSerializer = /** @class */ (function () {
     function SanitizingHtmlSerializer() {
         this.sanitizedSomething = false;
         this.buf = [];
+        this.DOM = getDOM();
     }
     /**
      * @param {?} el
@@ -66323,33 +66514,33 @@ var SanitizingHtmlSerializer = /** @class */ (function () {
         // This cannot use a TreeWalker, as it has to run on Angular's various DOM adapters.
         // However this code never accesses properties off of `document` before deleting its contents
         // again, so it shouldn't be vulnerable to DOM clobbering.
-        var /** @type {?} */ current = /** @type {?} */ ((el.firstChild));
+        var /** @type {?} */ current = /** @type {?} */ ((this.DOM.firstChild(el)));
         while (current) {
-            if (DOM.isElementNode(current)) {
+            if (this.DOM.isElementNode(current)) {
                 this.startElement(/** @type {?} */ (current));
             }
-            else if (DOM.isTextNode(current)) {
-                this.chars(/** @type {?} */ ((DOM.nodeValue(current))));
+            else if (this.DOM.isTextNode(current)) {
+                this.chars(/** @type {?} */ ((this.DOM.nodeValue(current))));
             }
             else {
                 // Strip non-element, non-text nodes.
                 this.sanitizedSomething = true;
             }
-            if (DOM.firstChild(current)) {
-                current = /** @type {?} */ ((DOM.firstChild(current)));
+            if (this.DOM.firstChild(current)) {
+                current = /** @type {?} */ ((this.DOM.firstChild(current)));
                 continue;
             }
             while (current) {
                 // Leaving the element. Walk up and to the right, closing tags as we go.
-                if (DOM.isElementNode(current)) {
+                if (this.DOM.isElementNode(current)) {
                     this.endElement(/** @type {?} */ (current));
                 }
-                var /** @type {?} */ next = checkClobberedElement(current, /** @type {?} */ ((DOM.nextSibling(current))));
+                var /** @type {?} */ next = this.checkClobberedElement(current, /** @type {?} */ ((this.DOM.nextSibling(current))));
                 if (next) {
                     current = next;
                     break;
                 }
-                current = checkClobberedElement(current, /** @type {?} */ ((DOM.parentElement(current))));
+                current = this.checkClobberedElement(current, /** @type {?} */ ((this.DOM.parentElement(current))));
             }
         }
         return this.buf.join('');
@@ -66364,14 +66555,14 @@ var SanitizingHtmlSerializer = /** @class */ (function () {
      */
     function (element) {
         var _this = this;
-        var /** @type {?} */ tagName = DOM.nodeName(element).toLowerCase();
+        var /** @type {?} */ tagName = this.DOM.nodeName(element).toLowerCase();
         if (!VALID_ELEMENTS.hasOwnProperty(tagName)) {
             this.sanitizedSomething = true;
             return;
         }
         this.buf.push('<');
         this.buf.push(tagName);
-        DOM.attributeMap(element).forEach(function (value, attrName) {
+        this.DOM.attributeMap(element).forEach(function (value, attrName) {
             var /** @type {?} */ lower = attrName.toLowerCase();
             if (!VALID_ATTRS.hasOwnProperty(lower)) {
                 _this.sanitizedSomething = true;
@@ -66399,7 +66590,7 @@ var SanitizingHtmlSerializer = /** @class */ (function () {
      * @return {?}
      */
     function (current) {
-        var /** @type {?} */ tagName = DOM.nodeName(current).toLowerCase();
+        var /** @type {?} */ tagName = this.DOM.nodeName(current).toLowerCase();
         if (VALID_ELEMENTS.hasOwnProperty(tagName) && !VOID_ELEMENTS.hasOwnProperty(tagName)) {
             this.buf.push('</');
             this.buf.push(tagName);
@@ -66415,19 +66606,24 @@ var SanitizingHtmlSerializer = /** @class */ (function () {
      * @return {?}
      */
     function (chars) { this.buf.push(encodeEntities(chars)); };
+    /**
+     * @param {?} node
+     * @param {?} nextNode
+     * @return {?}
+     */
+    SanitizingHtmlSerializer.prototype.checkClobberedElement = /**
+     * @param {?} node
+     * @param {?} nextNode
+     * @return {?}
+     */
+    function (node, nextNode) {
+        if (nextNode && this.DOM.contains(node, nextNode)) {
+            throw new Error("Failed to sanitize html because the element is clobbered: " + this.DOM.getOuterHTML(node));
+        }
+        return nextNode;
+    };
     return SanitizingHtmlSerializer;
 }());
-/**
- * @param {?} node
- * @param {?} nextNode
- * @return {?}
- */
-function checkClobberedElement(node, nextNode) {
-    if (nextNode && DOM.contains(node, nextNode)) {
-        throw new Error("Failed to sanitize html because the element is clobbered: " + DOM.getOuterHTML(node));
-    }
-    return nextNode;
-}
 // Regular Expressions for parsing tags and attributes
 var SURROGATE_PAIR_REGEXP = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
 // ! to ~ is the ASCII range.
@@ -66450,27 +66646,7 @@ function encodeEntities(value) {
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 }
-/**
- * When IE9-11 comes across an unknown namespaced attribute e.g. 'xlink:foo' it adds 'xmlns:ns1'
- * attribute to declare ns1 namespace and prefixes the attribute with 'ns1' (e.g. 'ns1:xlink:foo').
- *
- * This is undesirable since we don't want to allow any of these custom attributes. This method
- * strips them all.
- * @param {?} el
- * @return {?}
- */
-function stripCustomNsAttrs(el) {
-    DOM.attributeMap(el).forEach(function (_, attrName) {
-        if (attrName === 'xmlns:ns1' || attrName.indexOf('ns1:') === 0) {
-            DOM.removeAttribute(el, attrName);
-        }
-    });
-    for (var _i = 0, _a = DOM.childNodesAsList(el); _i < _a.length; _i++) {
-        var n = _a[_i];
-        if (DOM.isElementNode(n))
-            stripCustomNsAttrs(/** @type {?} */ (n));
-    }
-}
+var inertBodyHelper;
 /**
  * Sanitizes the given unsafe, untrusted HTML fragment, and returns HTML text that is safe to add to
  * the DOM in a browser environment.
@@ -66479,10 +66655,13 @@ function stripCustomNsAttrs(el) {
  * @return {?}
  */
 function sanitizeHtml(defaultDoc, unsafeHtmlInput) {
+    var /** @type {?} */ DOM = getDOM();
+    var /** @type {?} */ inertBodyElement = null;
     try {
-        var /** @type {?} */ containerEl = getInertElement();
+        inertBodyHelper = inertBodyHelper || new InertBodyHelper(defaultDoc, DOM);
         // Make sure unsafeHtml is actually a string (TypeScript types are not enforced at runtime).
         var /** @type {?} */ unsafeHtml = unsafeHtmlInput ? String(unsafeHtmlInput) : '';
+        inertBodyElement = inertBodyHelper.getInertBodyElement(unsafeHtml);
         // mXSS protection. Repeatedly parse the document to make sure it stabilizes, so that a browser
         // trying to auto-correct incorrect HTML cannot cause formerly inert HTML to become dangerous.
         var /** @type {?} */ mXSSAttempts = 5;
@@ -66493,30 +66672,25 @@ function sanitizeHtml(defaultDoc, unsafeHtmlInput) {
             }
             mXSSAttempts--;
             unsafeHtml = parsedHtml;
-            DOM.setInnerHTML(containerEl, unsafeHtml);
-            if (defaultDoc.documentMode) {
-                // strip custom-namespaced attributes on IE<=11
-                stripCustomNsAttrs(containerEl);
-            }
-            parsedHtml = DOM.getInnerHTML(containerEl);
+            parsedHtml = DOM.getInnerHTML(inertBodyElement);
+            inertBodyElement = inertBodyHelper.getInertBodyElement(unsafeHtml);
         } while (unsafeHtml !== parsedHtml);
         var /** @type {?} */ sanitizer = new SanitizingHtmlSerializer();
-        var /** @type {?} */ safeHtml = sanitizer.sanitizeChildren(DOM.getTemplateContent(containerEl) || containerEl);
-        // Clear out the body element.
-        var /** @type {?} */ parent_1 = DOM.getTemplateContent(containerEl) || containerEl;
-        for (var _i = 0, _a = DOM.childNodesAsList(parent_1); _i < _a.length; _i++) {
-            var child = _a[_i];
-            DOM.removeChild(parent_1, child);
-        }
+        var /** @type {?} */ safeHtml = sanitizer.sanitizeChildren(DOM.getTemplateContent(inertBodyElement) || inertBodyElement);
         if (_angular_core.isDevMode() && sanitizer.sanitizedSomething) {
             DOM.log('WARNING: sanitizing HTML stripped some content (see http://g.co/ng/security#xss).');
         }
         return safeHtml;
     }
-    catch (/** @type {?} */ e) {
+    finally {
         // In case anything goes wrong, clear out inertElement to reset the entire DOM structure.
-        inertElement = null;
-        throw e;
+        if (inertBodyElement) {
+            var /** @type {?} */ parent_1 = DOM.getTemplateContent(inertBodyElement) || inertBodyElement;
+            for (var _i = 0, _a = DOM.childNodesAsList(parent_1); _i < _a.length; _i++) {
+                var child = _a[_i];
+                DOM.removeChild(parent_1, child);
+            }
+        }
     }
 }
 
@@ -67327,7 +67501,9 @@ var TransferState = /** @class */ (function () {
      * @param {?} defaultValue
      * @return {?}
      */
-    function (key, defaultValue) { return /** @type {?} */ (this.store[key]) || defaultValue; };
+    function (key, defaultValue) {
+        return this.store[key] !== undefined ? /** @type {?} */ (this.store[key]) : defaultValue;
+    };
     /**
      * Set the value corresponding to a key.
      */
@@ -67601,7 +67777,7 @@ var By = /** @class */ (function () {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('5.2.1');
+var VERSION = new _angular_core.Version('5.2.5');
 
 exports.BrowserModule = BrowserModule;
 exports.platformBrowser = platformBrowser;
