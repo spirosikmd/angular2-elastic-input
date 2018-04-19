@@ -50,7 +50,7 @@
     "core-js": "^2.5.1",
     "cz-conventional-changelog": "^2.0.0",
     "jasmine-core": "^2.8.0",
-    "karma": "^1.7.1",
+    "karma": "^2.0.2",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-sourcemap-loader": "^0.3.7",
