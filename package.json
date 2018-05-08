@@ -56,7 +56,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.5",
     "lite-server": "^2.3.0",
-    "ng-packagr": "^1.6.0",
+    "ng-packagr": "^2.4.4",
     "null-loader": "^0.1.1",
     "rxjs": "^5.5.0",
     "semantic-release": "^12.2.2",
