@@ -40,7 +40,7 @@
     "@angular/platform-browser": "^5.0.1",
     "@angular/platform-browser-dynamic": "^5.0.1",
     "@angular/platform-server": "^5.0.1",
-    "@types/core-js": "^0.9.43",
+    "@types/core-js": "^2.5.0",
     "@types/jasmine": "^2.6.0",
     "all-contributors-cli": "^4.5.1",
     "awesome-typescript-loader": "^3.2.3",
