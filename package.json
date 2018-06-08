@@ -42,7 +42,7 @@
     "@angular/platform-server": "^5.0.1",
     "@types/core-js": "^0.9.43",
     "@types/jasmine": "^2.6.0",
-    "all-contributors-cli": "^4.5.1",
+    "all-contributors-cli": "^5.0.0",
     "awesome-typescript-loader": "^3.2.3",
     "browserify": "^14.5.0",
     "commitizen": "^2.9.6",
